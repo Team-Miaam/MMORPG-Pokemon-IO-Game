@@ -3,8 +3,8 @@
 *04 SEPTEMBER 20XX / 4:30 PM / ROOM 436*
 ## ATTENDEES
 ![noman](https://img.shields.io/badge/Noman_5237-flourine-green.svg?style=for-the-badge&logo=appveyor) 
-![akshar](https://img.shields.io/badge/drinkingWater_64-bromine-red.svg?style=for-the-badge&logo=appveyor) 
 ![abir](https://img.shields.io/badge/chlorineCtrl-chlorine-blue.svg?style=for-the-badge&logo=appveyor) 
+![akshar](https://img.shields.io/badge/drinkingWater_64-bromine-red.svg?style=for-the-badge&logo=appveyor) 
 ![ridwan sir](https://img.shields.io/badge/ridwan_kabir-iodine-black.svg?style=for-the-badge&logo=appveyor) 
 
 ## AGENDA
