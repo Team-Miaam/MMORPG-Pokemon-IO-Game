@@ -18,7 +18,9 @@
 | ![20-23](https://img.shields.io/badge/20-23-orange.svg?style=for-the-badge) | Lorem ipsum dolor sit amet, consectetuer adipiscing elit.|
 ## NOTES
 🔰 Lorem ipsum dolor sit amet consectetuer adipiscing elit. 
+
 🔰 Vestibulum ante ipsum primis elementum, libero interdum auctor cursus, sapien enim dictum quam. 
+
 🔰 Phasellus vehicula nonummy
 ## TASKS
 ⚡ Lorem ipsum dolor sit amet consectetuer adipiscing elit.  
