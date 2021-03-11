@@ -4,7 +4,7 @@
 ## ATTENDEES
 ![noman](https://img.shields.io/badge/Noman5237-flourine-green.svg?style=for-the-badge&logo=github) 
 ![abir](https://img.shields.io/badge/chlorineCtrl-chlorine-blue.svg?style=for-the-badge&logo=github) 
-![akshar](https://img.shields.io/badge/drinkingWater_64-bromine-red.svg?style=for-the-badge&logo=github) 
+![akshar](https://img.shields.io/badge/drinkingWater64-bromine-red.svg?style=for-the-badge&logo=github) 
 ![ridwan sir](https://img.shields.io/badge/ridwan_kabir-iodine-black.svg?style=for-the-badge&logo=github) 
 
 ## AGENDA
