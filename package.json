@@ -1,0 +1,26 @@
+{
+	"name": "renderingncameraprototype",
+	"version": "1.0.0",
+	"description": "Rendering and Camera Prototype",
+	"main": "game.js",
+	"scripts": {
+		"build": "webpack"
+	},
+	"keywords": [
+		"prototype"
+	],
+	"author": "Noman",
+	"license": "ISC",
+	"devDependencies": {
+		"babel-eslint": "^10.1.0",
+		"eslint": "^7.21.0",
+		"eslint-config-airbnb-base": "^14.2.1",
+		"eslint-config-p5js": "^1.1.0",
+		"eslint-plugin-import": "^2.22.1",
+		"webpack": "^5.24.4",
+		"webpack-cli": "^4.5.0"
+	},
+	"dependencies": {
+		"p5": "^1.3.0"
+	}
+}
