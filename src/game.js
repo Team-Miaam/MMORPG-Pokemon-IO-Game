@@ -34,17 +34,32 @@ const sketch = (p) => {
 						jModifier = 0;
 					}
 					// console.log(nextLine);
-					p.image(
-						worldtilemap,
-						32 * jModifier,
-						32 * nextLine,
-						32,
-						32,
-						((arrayObject[j] % 8) - 1) * 32,
-						Math.floor(arrayObject[j] / 8) * 32,
-						32,
-						32
-					);
+					if (arrayObject[j] % 8 === 0) {
+						p.image(
+							worldtilemap,
+							32 * jModifier,
+							32 * nextLine,
+							32,
+							32,
+							(arrayObject[j] - 1) * 32,
+							(Math.floor(arrayObject[j] / 8) - 1) * 32,
+							32,
+							32
+						);
+					} else {
+						p.image(
+							worldtilemap,
+							32 * jModifier,
+							32 * nextLine,
+							32,
+							32,
+							((arrayObject[j] % 8) - 1) * 32,
+							(Math.floor(arrayObject[j] / 8) - 0) * 32,
+							32,
+							32
+						);
+					}
+
 					jModifier += 1;
 				}
 			}
