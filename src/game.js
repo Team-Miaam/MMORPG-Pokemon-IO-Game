@@ -1,73 +1,35 @@
 import p5 from 'p5';
+import WorldRenderer from './WorldRenderer.js';
 
+let betamapData;
 let worldtilemap;
 let worldtileData;
 let tilesetSource;
+let demoWorld;
 
 const sketch = (p) => {
 	p.preload = () => {
+		betamapData = p.loadJSON('../maps/betamap.json');
 		worldtileData = p.loadJSON('../maps/newmap.json');
-		worldtilemap = p.loadImage('../images/worldtileset.png');
+		betamapData.worldtilemap = p.loadImage('../images/worldtileset.png');
 		tilesetSource = p.loadJSON('../maps/worldtileset.json');
 	};
 	p.setup = () => {
-		p.createCanvas(3200, 320);
+		p.createCanvas(1200, 1200);
 		// console.log(tilesetSource);
 		// console.log(worldtileData.layers[0].data.length);
 		p.frameRate(30);
+		demoWorld = WorldRenderer(betamapData, tilesetSource, 32, 32);
 	};
 
 	p.draw = () => {
 		// p.background(0);
-		//p.image(worldtilemap, 0, 0, 32, 32, 32 * 6, 32 * 0, 32, 32);
+		// p.image(worldtilemap, 0, 0, 32, 32, 32 * 6, 32 * 0, 32, 32);
 		// p.image(worldtilemap, 32, 0, 32, 32, 32 * 7, 32 * 0, 32, 32);
 		// p.image(worldtilemap, 0, 32, 32, 32, 32 * 6, 32 * 1, 32, 32);
 		// p.image(worldtilemap, 32, 32, 32, 32, 32 * 7, 32 * 1, 32, 32);
 		// p.image(worldtilemap, 32, 0, 32, 32, 32, 1984 + 32, 32, 32);
-		for (let i = 0; i < worldtileData.layers.length; i += 1) {
-			if (worldtileData.layers[i].type === 'tilelayer') {
-				// console.log(worldtileData.layers[i].data['1']);
-				let arrayObject = Object.values(worldtileData.layers[i].data);
-				let nextLine = 0;
-				let jModifier = 0;
-				// console.log(a.length);
-				for (let j = 0; j < arrayObject.length; j += 1) {
-					// console.log(worldtileData.layers[i].data[j]);
-					if (j % 10 === 0 && j !== 0) {
-						nextLine += 1;
-						jModifier = 0;
-					}
-					// console.log(nextLine);
-					if (arrayObject[j] % 8 === 0) {
-						p.image(
-							worldtilemap,
-							32 * jModifier,
-							32 * nextLine,
-							32,
-							32,
-							7 * 32, // bad logic
-							(arrayObject[j] / 8 - 1) * 32, // bad logic
-							32,
-							32
-						);
-					} else {
-						p.image(
-							worldtilemap,
-							32 * jModifier,
-							32 * nextLine,
-							32,
-							32,
-							((arrayObject[j] % 8) - 1) * 32,
-							(Math.floor(arrayObject[j] / 8) - 0) * 32,
-							32,
-							32
-						);
-					}
-
-					jModifier += 1;
-				}
-			}
-		}
+		demoWorld.draw(p);
 	};
 };
 
