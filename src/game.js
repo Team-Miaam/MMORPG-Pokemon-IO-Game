@@ -19,7 +19,11 @@ const sketch = (p) => {
 
 	p.draw = () => {
 		// p.background(0);
-		p.image(worldtilemap, 0, 0, 32, 32, 32, 1984 + 32, 32, 32);
+		//p.image(worldtilemap, 0, 0, 32, 32, 32 * 6, 32 * 0, 32, 32);
+		// p.image(worldtilemap, 32, 0, 32, 32, 32 * 7, 32 * 0, 32, 32);
+		// p.image(worldtilemap, 0, 32, 32, 32, 32 * 6, 32 * 1, 32, 32);
+		// p.image(worldtilemap, 32, 32, 32, 32, 32 * 7, 32 * 1, 32, 32);
+		// p.image(worldtilemap, 32, 0, 32, 32, 32, 1984 + 32, 32, 32);
 		for (let i = 0; i < worldtileData.layers.length; i += 1) {
 			if (worldtileData.layers[i].type === 'tilelayer') {
 				// console.log(worldtileData.layers[i].data['1']);
@@ -41,8 +45,8 @@ const sketch = (p) => {
 							32 * nextLine,
 							32,
 							32,
-							(arrayObject[j] - 1) * 32,
-							(Math.floor(arrayObject[j] / 8) - 1) * 32,
+							7 * 32, // bad logic
+							(arrayObject[j] / 8 - 1) * 32, // bad logic
 							32,
 							32
 						);
@@ -64,7 +68,6 @@ const sketch = (p) => {
 				}
 			}
 		}
-		// p.image(worldtilemap, 32, 0, 32, 32, 32, 1984 + 32, 32, 32);
 	};
 };
 
