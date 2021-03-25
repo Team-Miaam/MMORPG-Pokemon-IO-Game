@@ -1,4 +1,4 @@
-function WorldRenderer(worldJSON, tileJSON, tileWidth, tileHeight) {
+function WorldRenderer(worldJSON, tileJSON, tileWidth, tileHeight, object) {
 	// let dataArray;
 	// let index = 0;
 	let layers = worldJSON.layers;
@@ -9,7 +9,7 @@ function WorldRenderer(worldJSON, tileJSON, tileWidth, tileHeight) {
 				let dataArray = Object.values(layers[index].data);
 				let nextLine = 0;
 				let line = 0;
-
+				// console.log('in layer');
 				for (let j = 0; j < dataArray.length; j += 1) {
 					if (j % worldJSON.width === 0 && j !== 0) {
 						nextLine += 1;
@@ -43,6 +43,16 @@ function WorldRenderer(worldJSON, tileJSON, tileWidth, tileHeight) {
 						);
 					}
 					line += 1;
+				}
+			} else if (layers[index].type === 'objectgroup') {
+				// console.log('in object');
+				for (let j = 0; j < layers[index].objects.length; j += 1) {
+					// console.log(layers[index].objects[j].name);
+					if (layers[index].objects[j].name === 'start') {
+						// console.log('in for loop');
+						object.show(p);
+						object.update();
+					}
 				}
 			}
 		}
