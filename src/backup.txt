@@ -1,44 +1,24 @@
-for (let i = 0; i < worldtileData.layers.length; i += 1) {
-			if (worldtileData.layers[i].type === 'tilelayer') {
-				// console.log(worldtileData.layers[i].data['1']);
-				let arrayObject = Object.values(worldtileData.layers[i].data);
-				let nextLine = 0;
-				let jModifier = 0;
-				// console.log(a.length);
-				for (let j = 0; j < arrayObject.length; j += 1) {
-					// console.log(worldtileData.layers[i].data[j]);
-					if (j % 10 === 0 && j !== 0) {
-						nextLine += 1;
-						jModifier = 0;
-					}
-					// console.log(nextLine);
-					if (arrayObject[j] % 8 === 0) {
-						p.image(
-							worldtilemap,
-							32 * jModifier,
-							32 * nextLine,
-							32,
-							32,
-							7 * 32, // 7 has to be get from somewhere
-							(arrayObject[j] / 8 - 1) * 32, // bad logic
-							32,
-							32
-						);
-					} else {
-						p.image(
-							worldtilemap,
-							32 * jModifier,
-							32 * nextLine,
-							32,
-							32,
-							((arrayObject[j] % 8) - 1) * 32,
-							Math.floor(arrayObject[j] / 8 - 0) * 32,
-							32,
-							32
-						);
-					}
-
-					jModifier += 1;
-				}
+update(obj) {
+		this.x += this.xspeed;
+		this.y += this.yspeed;
+		if (
+			this.x - obj.x < obj.width &&
+			this.x - obj.x > -obj.width &&
+			this.y - obj.y < obj.height &&
+			this.y - obj.y > -obj.height - 12
+		) {
+			// if (obj.x > this.x) {
+			// 	this.x = obj.x - obj.width;
+			// }
+			// if (obj.x < this.x) {
+			// 	this.x = obj.x + obj.width;
+			// }
+			if (obj.y > this.y) {
+				this.y = obj.y - obj.height - 12;
 			}
+			if (obj.y < this.y) {
+				this.y = obj.y + obj.height;
+			}
+			// this.y = obj.y - 5;
 		}
+	},
