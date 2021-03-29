@@ -1,6 +1,9 @@
 import p5 from 'p5';
 import WorldRenderer from './WorldRenderer.js';
-
+let lar = false;
+let rar = false;
+let uar = false;
+let dar = false;
 let betamapData;
 let worldtilemap;
 let worldtileData;
@@ -13,7 +16,7 @@ let player = {
 	width: 32,
 	xspeed: 0,
 	yspeed: 0,
-	velocity: 3,
+	velocity: 4,
 	goLeft() {
 		this.x -= this.velocity;
 	},
@@ -34,24 +37,22 @@ let player = {
 		this.x += this.xspeed;
 		this.y += this.yspeed;
 		if (
-			this.x - obj.x < obj.width &&
-			this.x - obj.x > -obj.width &&
-			this.y - obj.y < obj.height &&
-			this.y - obj.y > -obj.height - 12
+			this.x > obj.x - obj.width &&
+			this.x < obj.x + obj.width &&
+			this.y > obj.y - obj.height &&
+			this.y < obj.y + obj.height
 		) {
-			// if (obj.x > this.x) {
-			// 	this.x = obj.x - obj.width;
-			// }
-			// if (obj.x < this.x) {
-			// 	this.x = obj.x + obj.width;
-			// }
-			if (obj.y > this.y) {
-				this.y = obj.y - obj.height - 12;
-			}
-			if (obj.y < this.y) {
+			// this.velocity = this.velocity * -1;
+			// this.velocity = this.velocity * 0;
+			if (rar) {
+				this.x = obj.x - obj.width;
+			} else if (lar) {
+				this.x = obj.x + obj.width;
+			} else if (dar) {
+				this.y = obj.y - obj.height;
+			} else if (uar) {
 				this.y = obj.y + obj.height;
 			}
-			// this.y = obj.y - 5;
 		}
 	},
 };
@@ -76,12 +77,28 @@ const sketch = (p) => {
 		// console.log('wtf');
 		if (p.keyIsDown(p.LEFT_ARROW)) {
 			player.goLeft();
+			lar = true;
+			rar = false;
+			uar = false;
+			dar = false;
 		} else if (p.keyIsDown(p.DOWN_ARROW)) {
 			player.goDown();
+			lar = false;
+			rar = false;
+			uar = false;
+			dar = true;
 		} else if (p.keyIsDown(p.UP_ARROW)) {
 			player.goUp();
+			lar = false;
+			rar = false;
+			uar = true;
+			dar = false;
 		} else if (p.keyIsDown(p.RIGHT_ARROW)) {
 			player.goRight();
+			lar = false;
+			rar = true;
+			uar = false;
+			dar = false;
 		}
 	};
 };

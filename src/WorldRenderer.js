@@ -59,7 +59,7 @@ function WorldRenderer(worldJSON, tileJSON, tileWidth, tileHeight, object) {
 						object.show(p);
 						object.update(layers[index].objects[1]);
 						// console.log(layers[2].objects[1].x + ' ' + object.x);
-						console.log(object.y + ' ' + layers[index].objects[1].y);
+						// nconsole.log(object.y + ' ' + layers[index].objects[1].y);
 					}
 				}
 			}
