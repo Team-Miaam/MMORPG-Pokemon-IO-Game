@@ -36,22 +36,17 @@ let player = {
 	update(obj) {
 		this.x += this.xspeed;
 		this.y += this.yspeed;
-		if (
-			this.x > obj.x - obj.width &&
-			this.x < obj.x + obj.width &&
-			this.y > obj.y - obj.height &&
-			this.y < obj.y + obj.height
-		) {
+		if (this.x > obj.x - 32 && this.x < obj.x + 32 && this.y > obj.y - 32 && this.y < obj.y + 32) {
 			// this.velocity = this.velocity * -1;
 			// this.velocity = this.velocity * 0;
 			if (rar) {
-				this.x = obj.x - obj.width;
+				this.x = obj.x - 32;
 			} else if (lar) {
-				this.x = obj.x + obj.width;
+				this.x = obj.x + 32;
 			} else if (dar) {
-				this.y = obj.y - obj.height;
+				this.y = obj.y - 32;
 			} else if (uar) {
-				this.y = obj.y + obj.height;
+				this.y = obj.y + 32;
 			}
 		}
 	},

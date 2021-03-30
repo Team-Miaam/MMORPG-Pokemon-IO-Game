@@ -10,6 +10,7 @@ function WorldRenderer(worldJSON, tileJSON, tileWidth, tileHeight, object) {
 	const draw = (p) => {
 		for (let index = 0; index < layers.length; index += 1) {
 			if (layers[index].type === 'tilelayer') {
+				console.log(typeof layers[index].data[0]);
 				let dataArray = Object.values(layers[index].data);
 				let nextLine = 0;
 				let line = 0;
@@ -19,6 +20,11 @@ function WorldRenderer(worldJSON, tileJSON, tileWidth, tileHeight, object) {
 						nextLine += 1;
 						line = 0;
 					}
+					if (layers[index].name === 'obstacles' && dataArray[j] !== 0) {
+						let obs = { x: 32 * line, y: 32 * nextLine };
+						object.update(obs);
+					}
+
 					// tilePrinter(p,dataArray, nextLine, line);
 
 					if (dataArray[j] % tileColumns === 0) {
@@ -57,7 +63,7 @@ function WorldRenderer(worldJSON, tileJSON, tileWidth, tileHeight, object) {
 						// object.x = layers[index].objects[j].x;
 						// object.y = layers[index].objects[j].y;
 						object.show(p);
-						object.update(layers[index].objects[1]);
+						// object.update(layers[index].objects[1]);
 						// console.log(layers[2].objects[1].x + ' ' + object.x);
 						// nconsole.log(object.y + ' ' + layers[index].objects[1].y);
 					}
