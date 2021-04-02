@@ -1,0 +1,15 @@
+{
+	"columns": 16,
+	"image": "../sprites/Interiors_free_32x32.png",
+	"imageheight": 1792,
+	"imagewidth": 512,
+	"margin": 0,
+	"name": "Interiors_free_32x32",
+	"spacing": 0,
+	"tilecount": 896,
+	"tiledversion": "1.4.3",
+	"tileheight": 32,
+	"tilewidth": 32,
+	"type": "tileset",
+	"version": 1.4
+}
