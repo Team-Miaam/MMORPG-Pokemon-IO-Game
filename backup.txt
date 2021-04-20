@@ -1,0 +1,47 @@
+let world = new PIXI.Container();
+		// weightxheight of each tile in pixel
+		world.tileheight = tiledMap.tileheight;
+		world.tilewidth = tiledMap.tilewidth;
+		//`width` and `height` of the world, in pixels
+		world.worldWidth = tiledMap.width * tiledMap.tilewidth;
+		world.worldHeight = tiledMap.height * tiledMap.tileheight;
+		//world's height and width in tiles
+		world.widthInTiles = tiledMap.width;
+		world.heightInTiles = tiledMap.height;
+		// array to store named objects
+		world.objects = [];
+		////Figure out how many columns there are on the tileset.
+		let numberOfTilesetColumns = Math.floor(tiledMap.tilesets[0].imagewidth / (tiledMap.tilewidth + spacing));
+
+
+
+
+
+
+        function makeTiledWorld(jsonTiledMap, tileset) {
+	//loader
+	let loader = PIXI.Loader.shared;
+	//loader.add(jsonTiledMap);
+	loader.add(jsonTiledMap).on('progress', loadProgressHandler).load(load);
+	// shows progress loading objects
+	function loadProgressHandler(loader, resource) {
+		//Display the file `url` currently being loaded
+		console.log('loading: ' + resource.url);
+
+		//Display the percentage of files currently loaded
+		console.log('progress: ' + loader.progress + '%');
+		//If you gave your files names as the first argument
+		//of the `add` method, you can access them like this
+		//console.log("loading: " + resource.name);
+	}
+
+	function load(loader) {
+		console.log('All files loaded');
+		world.tiledMap = load.resources[jsonTiledMap].data;
+	}
+
+	let world = new PIXI.Container();
+
+	console.log(loader);
+	return world;
+}
