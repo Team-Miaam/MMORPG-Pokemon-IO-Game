@@ -52,8 +52,8 @@ function makeTiledWorld(jsonTiledMap, tileset, stage) {
 			//console.log(texture);
 			let sprite = new PIXI.Sprite(texture);
 			//Make a rectangle the size of the sub-image
-			texture.baseTexture.width = 192;
-			texture.baseTexture.height = 192;
+			texture.baseTexture.width = 256;
+			texture.baseTexture.height = 16384;
 			imageFrame = new PIXI.Rectangle(x, y, width, height);
 			//console.log(imageFrame);
 			texture.frame = imageFrame;

@@ -17,7 +17,7 @@ let camera, message, leftArrow, upArrow, downArrow, rightArrow;
 let world;
 let num = 13;
 function setup() {
-	world = makeTiledWorld('./JSON/worldtile.json', './images/tileset.png', app.stage);
+	world = makeTiledWorld('./JSON/worldtile.json', './images/worldtilesetmini2.png', app.stage);
 	num = 12;
 	console.log(world);
 }
