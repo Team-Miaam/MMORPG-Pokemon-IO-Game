@@ -1,0 +1,44 @@
+{ "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "target":"."
+        }
+    },
+ "height":5,
+ "infinite":false,
+ "layers":[
+        {
+         "data":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         "height":5,
+         "id":1,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":5,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":2,
+ "nextobjectid":1,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tiledversion":"1.4.3",
+ "tileheight":32,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "source":"worldtileset.json"
+        }, 
+        {
+         "firstgid":5209,
+         "source":"testtileset.json"
+        }],
+ "tilewidth":32,
+ "type":"map",
+ "version":1.4,
+ "width":5,
+ "imagewidth":192
+}

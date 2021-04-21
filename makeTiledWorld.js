@@ -1,4 +1,4 @@
-function makeTiledWorld(jsonTiledMap, tileset) {
+function makeTiledWorld(jsonTiledMap, tileset, stage) {
 	//loader
 	let loader = PIXI.Loader.shared;
 	let world = new PIXI.Container();
@@ -24,9 +24,8 @@ function makeTiledWorld(jsonTiledMap, tileset) {
 		world.worldWidth = world.tiledMap.width * world.tiledMap.tilewidth;
 		world.worldHeight = world.tiledMap.height * world.tiledMap.tileheight;
 		//Figure out how many columns there are on the tileset.
-		//console.log(world.tiledMap.layers);
-
 		world.numberOfTilesetColumns = Math.floor(world.tiledMap.imagewidth / world.tiledMap.tilewidth);
+		console.log(world.tiledMap.imagewidth, world.tiledMap.tilewidth);
 		spriteMaker();
 	}
 	function frame(source, x, y, width, height) {
@@ -53,8 +52,8 @@ function makeTiledWorld(jsonTiledMap, tileset) {
 			//console.log(texture);
 			let sprite = new PIXI.Sprite(texture);
 			//Make a rectangle the size of the sub-image
-			texture.baseTexture.width = 256;
-			texture.baseTexture.height = 20832;
+			texture.baseTexture.width = 192;
+			texture.baseTexture.height = 192;
 			imageFrame = new PIXI.Rectangle(x, y, width, height);
 			//console.log(imageFrame);
 			texture.frame = imageFrame;
@@ -86,7 +85,7 @@ function makeTiledWorld(jsonTiledMap, tileset) {
 			if (tiledLayer.type === 'tilelayer') {
 				//Loop through the `data` array of this layer
 				tiledLayer.data.forEach((gid, index) => {
-					//console.log(gid, index);
+					console.log(gid, index);
 					let tileSprite,
 						texture,
 						mapX,
@@ -110,6 +109,7 @@ function makeTiledWorld(jsonTiledMap, tileset) {
 						tilesetX = tilesetColumn * world.tiledMap.tilewidth;
 						tilesetY = tilesetRow * world.tiledMap.tileheight;
 
+						//console.log(world.numberOfTilesetColumns, tilesetRow);
 						//Use the above values to create the sprite's image from the tileset image. The custom `frame` method captures the correct image from the tileset
 						/*******************************************************************************************************************************/
 						/*******************************************************************************************************************************/
@@ -134,6 +134,7 @@ function makeTiledWorld(jsonTiledMap, tileset) {
 						layerGroup.addChild(tileSprite);
 					}
 				});
+				//console.log(layerGroup);
 			}
 			//Is this layer a Tiled Editor `objectgroup`?
 			if (tiledLayer.type === 'objectgroup') {
@@ -145,6 +146,7 @@ function makeTiledWorld(jsonTiledMap, tileset) {
 					world.objects.push(object);
 				});
 			}
+			stage.addChild(layerGroup);
 		});
 
 		/*
