@@ -13,12 +13,19 @@ let app = new PIXI.Application({
 });
 document.body.appendChild(app.view);
 //let world = makeTiledWorld('JSON/worldtile.json', 'images/worldtileset.png');
-let camera, message, leftArrow, upArrow, downArrow, rightArrow;
-let world;
-let num = 13;
+let camera, message, leftArrow, upArrow, downArrow, rightArrow, world;
 function setup() {
 	world = makeTiledWorld('./JSON/worldtile.json', './images/worldtilesetmini2.png', app.stage);
-	num = 12;
+	// let playerTex = new PIXI.Texture.from('./images/enemy.png');
+	// const player = new PIXI.Sprite(playerTex);
+	// player.x = 480;
+	// player.y = 480;
+	// let objlayer = world.getObject('objects');
+	// objlayer.addChild(player);
+	// console.log(objlayer);
+	// app.stage.addChild(player);
 	console.log(world);
+
+	//let objectsLayer = world.getObject('objects');
 }
 setup();

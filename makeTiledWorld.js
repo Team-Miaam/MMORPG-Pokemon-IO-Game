@@ -85,7 +85,7 @@ function makeTiledWorld(jsonTiledMap, tileset, stage) {
 			if (tiledLayer.type === 'tilelayer') {
 				//Loop through the `data` array of this layer
 				tiledLayer.data.forEach((gid, index) => {
-					console.log(gid, index);
+					// console.log(gid, index);
 					let tileSprite,
 						texture,
 						mapX,
@@ -161,38 +161,50 @@ function makeTiledWorld(jsonTiledMap, tileset, stage) {
 		sprite.y = world.getObject("anySprite").y;
 		*/
 		//Search function
-		world.getObject = (objectName) => {
-			let searchForObject = () => {
-				let foundObject;
-				world.objects.some((object) => {
-					if (object.name && object.name === objectName) {
-						foundObject = object;
-						return true;
-					}
-				});
-				if (foundObject) {
-					return foundObject;
-				} else {
-					throw new Error('There is no object with the property name: ' + objectName);
-				}
-			};
-			return searchForObject();
-		};
-		world.getObjects = (objectName) => {
-			let foundObjects = [];
-			world.objects.forEach((object) => {
-				if (object.name && objectName.indexOf(object.name) !== -1) {
-					foundObjects.push(object);
+
+		/****************************************************************************************************/
+		let playerTex = new PIXI.Texture.from('./images/enemy.png');
+		const player = new PIXI.Sprite(playerTex);
+		player.x = 480;
+		player.y = 480;
+		let objlayer = world.getObject('objects');
+		objlayer.addChild(player);
+		console.log(objlayer);
+		/*****************************************************************************************************/
+	}
+	world.getObject = (objectName) => {
+		let searchForObject = () => {
+			let foundObject;
+			console.log(world.objects);
+			world.objects.some((object) => {
+				if (object.name && object.name === objectName) {
+					foundObject = object;
+					console.log(foundObject);
+					return true;
 				}
 			});
-			if (foundObjects.length > 0) {
-				return foundObjects;
+			if (foundObject) {
+				return foundObject;
 			} else {
-				throw new Error('Couldnt find those objects');
+				throw new Error('There is no object with the property name: ' + objectName);
 			}
-			return foundObjects;
 		};
-	}
+		return searchForObject();
+	};
+	world.getObjects = (objectName) => {
+		let foundObjects = [];
+		world.objects.forEach((object) => {
+			if (object.name && objectName.indexOf(object.name) !== -1) {
+				foundObjects.push(object);
+			}
+		});
+		if (foundObjects.length > 0) {
+			return foundObjects;
+		} else {
+			throw new Error('Couldnt find those objects');
+		}
+		return foundObjects;
+	};
 
 	return world;
 }

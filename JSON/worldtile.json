@@ -36,7 +36,7 @@
         {
          "draworder":"topdown",
          "id":6,
-         "name":"Object Layer 1",
+         "name":"objects",
          "objects":[
                 {
                  "height":0,
