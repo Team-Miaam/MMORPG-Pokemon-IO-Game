@@ -1,44 +1,51 @@
+import * as PIXI from 'pixi.js';
+
 class Miaam {
 	constructor(player) {
 		this.player = player;
+		console.log(this);
 	}
+
 	makeTiledWorld(jsonTiledMap, tileset, stage) {
-		//loader
+		// loader
+		let player = this.player;
 		let loader = PIXI.Loader.shared;
 		let world = new PIXI.Container();
 		world.objects = [];
-		//loader.add(jsonTiledMap);
+		// loader.add(jsonTiledMap);
 		const load = (loader) => {
 			console.log('All files loaded');
 			world.tiledMap = loader.resources[jsonTiledMap].data;
 			world.worldWidth = world.tiledMap.width * world.tiledMap.tilewidth;
 			world.worldHeight = world.tiledMap.height * world.tiledMap.tileheight;
-			//Figure out how many columns there are on the tileset.
-			world.numberOfTilesetColumns = Math.floor(world.tiledMap.imagewidth / world.tiledMap.tilewidth);
+			// Figure out how many columns there are on the tileset.
+			world.numberOfTilesetColumns = Math.floor(
+				world.tiledMap.imagewidth / world.tiledMap.tilewidth
+			);
 			spriteMaker();
 		};
-		loader.add(jsonTiledMap).on('progress', loadProgressHandler).load(load);
+		loader.add(jsonTiledMap).load(load);
 
 		// shows progress loading objects
 		function loadProgressHandler(loader, resource) {
-			//Display the file `url` currently being loaded
+			// Display the file `url` currently being loaded
 			console.log('loading: ' + resource.url);
 
-			//Display the percentage of files currently loaded
+			// Display the percentage of files currently loaded
 			console.log('progress: ' + loader.progress + '%');
-			//If you gave your files names as the first argument
-			//of the `add` method, you can access them like this
-			//console.log("loading: " + resource.name);
+			// If you gave your files names as the first argument
+			// of the `add` method, you can access them like this
+			// console.log("loading: " + resource.name);
 		}
 
 		function frame(source, x, y, width, height) {
 			let texture, imageFrame;
-			//console.log(PIXI.utils.TextureCache);
-			//If the source is a string, it's either a texture in the
-			//cache or an image file
+			// console.log(PIXI.utils.TextureCache);
+			// If the source is a string, it's either a texture in the
+			// cache or an image file
 			if (typeof source === 'string') {
 				if (PIXI.utils.TextureCache[source]) {
-					//console.log(PIXI.utils.TextureCache[source]);
+					console.log(PIXI.utils.TextureCache[source]);
 					texture = new PIXI.Texture(PIXI.utils.TextureCache[source]);
 				} else {
 					texture = new PIXI.Texture.from(source);
@@ -47,7 +54,7 @@ class Miaam {
 
 			//If the `source` is a texture,  use it
 			else if (source instanceof PIXI.Texture) {
-				texture = new PIXI.Texture.from(source);
+				texture = new PIXI.Texture(source);
 			}
 			if (!texture) {
 				throw new Error(`Please load the ${source} texture into the cache.`);
@@ -188,7 +195,9 @@ class Miaam {
 				if (foundObject) {
 					return foundObject;
 				} else {
-					throw new Error('There is no object with the property name: ' + objectName);
+					throw new Error(
+						'There is no object with the property name: ' + objectName
+					);
 				}
 			};
 			return searchForObject();
@@ -219,3 +228,5 @@ class Miaam {
 		return world;
 	}
 }
+
+export default Miaam;

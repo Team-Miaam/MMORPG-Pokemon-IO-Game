@@ -1,11 +1,11 @@
 function keyboard(value) {
-	let key = {};
+	const key = {};
 	key.value = value;
 	key.isDown = false;
 	key.isUp = true;
 	key.press = undefined;
 	key.release = undefined;
-	//The `downHandler`
+	// The `downHandler`
 	key.downHandler = (event) => {
 		if (event.key === key.value) {
 			if (key.isUp && key.press) key.press();
@@ -15,7 +15,7 @@ function keyboard(value) {
 		}
 	};
 
-	//The `upHandler`
+	// The `upHandler`
 	key.upHandler = (event) => {
 		if (event.key === key.value) {
 			if (key.isDown && key.release) key.release();
@@ -25,7 +25,7 @@ function keyboard(value) {
 		}
 	};
 
-	//Attach event listeners
+	// Attach event listeners
 	const downListener = key.downHandler.bind(key);
 	const upListener = key.upHandler.bind(key);
 
@@ -40,3 +40,5 @@ function keyboard(value) {
 
 	return key;
 }
+
+export default keyboard;

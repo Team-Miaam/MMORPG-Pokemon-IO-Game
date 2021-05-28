@@ -1,4 +1,4 @@
 module.exports = {
 	mode: 'development',
-	entry: './index.js',
+	entry: './pixiGame/index.js',
 };

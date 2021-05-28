@@ -90,3 +90,4 @@ function worldCamera(world, worldWidth, worldHeight, canvas) {
 	//Return the `camera` object
 	return camera;
 }
+export default worldCamera;

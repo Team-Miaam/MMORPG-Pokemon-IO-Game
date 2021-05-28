@@ -3,6 +3,10 @@
 //     resources = PIXI.loader.resources,
 //     Sprite = PIXI.Sprite;
 //     TextureCache = PIXI.utils.TextureCache
+import * as PIXI from 'pixi.js';
+import Miaam from './Miaam';
+import Player from './Player';
+import worldCamera from './Camera';
 
 let app = new PIXI.Application({
 	width: 512,
@@ -12,14 +16,22 @@ let app = new PIXI.Application({
 	resolution: 1,
 });
 document.body.appendChild(app.view);
-//let world = makeTiledWorld('JSON/worldtile.json', 'images/worldtileset.png');
+// let world = makeTiledWorld('JSON/worldtile.json', 'images/worldtileset.png');
 
 let playerTex = new PIXI.Texture.from('./images/enemy.png');
 let playerSprite = new PIXI.Sprite(playerTex);
 let player = new Player(playerSprite);
-let camera, message, leftArrow, upArrow, downArrow, rightArrow, world;
+let camera;
+let message;
+let leftArrow;
+let upArrow;
+let downArrow, rightArrow, world;
 let g = new Miaam(player);
-world = g.makeTiledWorld('./JSON/worldtile.json', './images/worldtilesetmini2.png', app.stage);
+world = g.makeTiledWorld(
+	'./JSON/worldtile.json',
+	'./images/worldtilesetmini2.png',
+	app.stage
+);
 app.stage.addChild(world);
 console.log(world.objects);
 camera = worldCamera(world, 960, 960);
@@ -30,26 +42,26 @@ function setup() {
 	console.log(player.sprite);
 	console.log(world.x);
 
-	//camera.centerOver(player.sprite);
+	// camera.centerOver(player.sprite);
 
 	player.left.press = () => {
 		console.log('left');
-		//Change the player's velocity when the key is pressed
+		// Change the player's velocity when the key is pressed
 		player.vx = -3;
 		player.vy = 0;
 		console.log(player.vx, player.vy);
 	};
 
-	//Left arrow key `release` method
+	// Left arrow key `release` method
 	player.left.release = () => {
-		//If the left arrow has been released, and the right arrow isn't down,
-		//and player isn't moving vertically:
-		//Stop the player
+		// If the left arrow has been released, and the right arrow isn't down,
+		// and player isn't moving vertically:
+		// Stop the player
 		if (!player.right.isDown && player.vy === 0) {
 			player.vx = 0;
 		}
 	};
-	//Up
+	// Up
 	player.up.press = () => {
 		console.log('up');
 		player.vy = -3;
@@ -62,7 +74,7 @@ function setup() {
 		}
 	};
 
-	//Right
+	// Right
 	player.right.press = () => {
 		console.log('right');
 		player.vx = 3;
@@ -75,7 +87,7 @@ function setup() {
 		}
 	};
 
-	//Down
+	// Down
 	player.down.press = () => {
 		console.log('down');
 		player.vy = 3;
@@ -92,13 +104,13 @@ function setup() {
 console.log(world);
 setup();
 app.ticker.add((delta) => {
-	//camera.follow(player.sprite);
+	// camera.follow(player.sprite);
 	player.sprite.x += player.vx;
 	player.sprite.y += player.vy;
 
 	camera.follow(player.sprite);
 	console.log(world.x, world.y);
-	//count += 0.005;
+	// count += 0.005;
 	// player.sprite.x += player.vx;
 	// if (!(player.sprite.x < 950) || !(player.sprite.x > 10)) {
 	// 	player.sprite.anchor.set(0.5);
