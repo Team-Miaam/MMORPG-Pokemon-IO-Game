@@ -24,9 +24,7 @@ class Miaam {
 			);
 			spriteMaker();
 		};
-		loader.add(jsonTiledMap).load(load);
 
-		// shows progress loading objects
 		function loadProgressHandler(loader, resource) {
 			// Display the file `url` currently being loaded
 			console.log('loading: ' + resource.url);
@@ -37,6 +35,10 @@ class Miaam {
 			// of the `add` method, you can access them like this
 			// console.log("loading: " + resource.name);
 		}
+		loader.add(jsonTiledMap).load(load);
+		loader.onProgress.add(loadProgressHandler);
+
+		// shows progress loading objects
 
 		function frame(source, x, y, width, height) {
 			let texture, imageFrame;
@@ -45,14 +47,14 @@ class Miaam {
 			// cache or an image file
 			if (typeof source === 'string') {
 				if (PIXI.utils.TextureCache[source]) {
-					console.log(PIXI.utils.TextureCache[source]);
+					// console.log(PIXI.utils.TextureCache[source]);
 					texture = new PIXI.Texture(PIXI.utils.TextureCache[source]);
 				} else {
 					texture = new PIXI.Texture.from(source);
 				}
 			}
 
-			//If the `source` is a texture,  use it
+			// If the `source` is a texture,  use it
 			else if (source instanceof PIXI.Texture) {
 				texture = new PIXI.Texture(source);
 			}
