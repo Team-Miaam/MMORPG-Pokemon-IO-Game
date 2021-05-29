@@ -26,7 +26,8 @@ let message;
 let leftArrow;
 let upArrow;
 let downArrow, rightArrow, world;
-let g = new Miaam(player);
+let g = new Miaam();
+g.setPlayer(player);
 world = g.makeTiledWorld(
 	'./JSON/worldtile.json',
 	'./images/worldtilesetmini2.png',

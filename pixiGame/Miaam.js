@@ -1,9 +1,12 @@
 import * as PIXI from 'pixi.js';
 
 class Miaam {
-	constructor(player) {
+	// 	constructor(player) {
+	// 		this.player = player;
+	// 		// console.log(this);
+	// 	}
+	setPlayer(player) {
 		this.player = player;
-		console.log(this);
 	}
 
 	makeTiledWorld(jsonTiledMap, tileset, stage) {
@@ -41,7 +44,8 @@ class Miaam {
 		// shows progress loading objects
 
 		function frame(source, x, y, width, height) {
-			let texture, imageFrame;
+			let texture;
+			let imageFrame;
 			// console.log(PIXI.utils.TextureCache);
 			// If the source is a string, it's either a texture in the
 			// cache or an image file
@@ -61,70 +65,70 @@ class Miaam {
 			if (!texture) {
 				throw new Error(`Please load the ${source} texture into the cache.`);
 			} else {
-				//console.log(texture);
+				// console.log(texture);
 				let sprite = new PIXI.Sprite(texture);
-				//Make a rectangle the size of the sub-image
+				// Make a rectangle the size of the sub-image
 				texture.baseTexture.width = 256;
 				texture.baseTexture.height = 16384;
 				imageFrame = new PIXI.Rectangle(x, y, width, height);
-				//console.log(imageFrame);
+				// console.log(imageFrame);
 				texture.frame = imageFrame;
 				return texture;
 			}
 		}
 
-		//let layer23 = world.tiledMap.layers;
+		// let layer23 = world.tiledMap.layers;
 
-		//loop through every layer
+		// loop through every layer
 		function spriteMaker() {
 			world.tiledMap.layers.forEach((tiledLayer) => {
-				//Make a container group for this layer and copy
-				//all of the layer properties onto it
+				// Make a container group for this layer and copy
+				// all of the layer properties onto it
 				let layerGroup = new PIXI.Container();
 				Object.keys(tiledLayer).forEach((key) => {
-					//Add all the layer's properties to the group, except the width and height
+					// Add all the layer's properties to the group, except the width and height
 					if (key !== 'width' && key !== 'height') {
 						layerGroup[key] = tiledLayer[key];
 					}
 				});
-				//Translate Tiled Editor’s `opacity` property to the Container’s equivalent `alpha` property
+				// Translate Tiled Editor’s `opacity` property to the Container’s equivalent `alpha` property
 				layerGroup.alpha = tiledLayer.opacity;
-				//Add the group to the `world`
+				// Add the group to the `world`
 				world.addChild(layerGroup);
-				//Push the group into the `world`'s `objects` array So you can access it later
+				// Push the group into the `world`'s `objects` array So you can access it later
 				world.objects.push(layerGroup);
-				//Is this current layer a `tilelayer`?
+				// Is this current layer a `tilelayer`?
 				if (tiledLayer.type === 'tilelayer') {
-					//Loop through the `data` array of this layer
+					// Loop through the `data` array of this layer
 					tiledLayer.data.forEach((gid, index) => {
 						// console.log(gid, index);
-						let tileSprite,
-							texture,
-							mapX,
-							mapY,
-							tilesetX,
-							tilesetY,
-							mapColumn,
-							mapRow,
-							tilesetColumn,
-							tilesetRow;
-						//if gid=> grid id is not zero, create a sprite
+						let tileSprite;
+						let texture;
+						let mapX;
+						let mapY;
+						let tilesetX;
+						let tilesetY;
+						let mapColumn;
+						let mapRow;
+						let tilesetColumn;
+						let tilesetRow;
+						// if gid=> grid id is not zero, create a sprite
 						if (gid !== 0) {
-							//Figure out the map column and row number that we're on, and then calculate the grid cell's x and y pixel position
+							// Figure out the map column and row number that we're on, and then calculate the grid cell's x and y pixel position
 							mapColumn = index % world.tiledMap.width;
 							mapRow = Math.floor(index / world.tiledMap.width);
 							mapX = mapColumn * world.tiledMap.tilewidth;
 							mapY = mapRow * world.tiledMap.tileheight;
-							//Figure out the column and row number that the tileset image is on, and then use those values to calculate the x and y pixel position of the image on the tileset
+							// Figure out the column and row number that the tileset image is on, and then use those values to calculate the x and y pixel position of the image on the tileset
 							tilesetColumn = (gid - 1) % world.numberOfTilesetColumns;
 							tilesetRow = Math.floor((gid - 1) / world.numberOfTilesetColumns);
 							tilesetX = tilesetColumn * world.tiledMap.tilewidth;
 							tilesetY = tilesetRow * world.tiledMap.tileheight;
 
-							//console.log(world.numberOfTilesetColumns, tilesetRow);
-							//Use the above values to create the sprite's image from the tileset image. The custom `frame` method captures the correct image from the tileset
-							/*******************************************************************************************************************************/
-							/*******************************************************************************************************************************/
+							// console.log(world.numberOfTilesetColumns, tilesetRow);
+							// Use the above values to create the sprite's image from the tileset image. The custom `frame` method captures the correct image from the tileset
+							/* ***************************************************************************************************************************** */
+							/* ***************************************************************************************************************************** */
 							texture = frame(
 								tileset,
 								tilesetX,
@@ -132,34 +136,34 @@ class Miaam {
 								world.tiledMap.tilewidth,
 								world.tiledMap.tileheight
 							);
-							/*******************************************************************************************************************************/
-							/*******************************************************************************************************************************/
+							/* ***************************************************************************************************************************** */
+							/* ***************************************************************************************************************************** */
 
 							tileSprite = new PIXI.Sprite(texture);
 							tileSprite.x = mapX;
 							tileSprite.y = mapY;
-							//Make a record of the sprite's index number in the array (We'll use this for collision detection, which you'll learn in the next chapter)
+							// Make a record of the sprite's index number in the array (We'll use this for collision detection, which you'll learn in the next chapter)
 							tileSprite.index = index;
-							//Make a record of the sprite's `gid` on the tileset. This will also be useful for collision detection later
+							// Make a record of the sprite's `gid` on the tileset. This will also be useful for collision detection later
 							tileSprite.gid = gid;
-							//Add the sprite to the current layer group
+							// Add the sprite to the current layer group
 							world.addChild(tileSprite);
 						}
 					});
-					//console.log(layerGroup);
+					// console.log(layerGroup);
 				}
-				//Is this layer a Tiled Editor `objectgroup`?
+				// Is this layer a Tiled Editor `objectgroup`?
 				if (tiledLayer.type === 'objectgroup') {
 					tiledLayer.objects.forEach((object) => {
-						//We're just going to capture the object's properties so that we can decide what to do with it later
-						//Get a reference to the layer group the object is in
+						// We're just going to capture the object's properties so that we can decide what to do with it later
+						//  Get a reference to the layer group the object is in
 						object.group = layerGroup;
-						//Push the object into the world's `objects` array
+						// Push the object into the world's `objects` array
 						world.objects.push(object);
 					});
 				}
 				// if i dont add it in stage then doesn't work
-				//stage.addChild(layerGroup);
+				// stage.addChild(layerGroup);
 			});
 
 			/*
@@ -173,9 +177,9 @@ class Miaam {
 			sprite.x = world.getObject("anySprite").x;
 			sprite.y = world.getObject("anySprite").y;
 			*/
-			//Search function
+			// Search function
 
-			/****************************************************************************************************/
+			/* ************************************************************************************************** */
 			// let playerTex = new PIXI.Texture.from('./images/enemy.png');
 			// const player = new PIXI.Sprite(playerTex);
 			// player.x = 480;
@@ -183,7 +187,7 @@ class Miaam {
 			let objlayer = world.getObject('objects');
 			// objlayer.addChild(player);
 			Makeplayer();
-			/*****************************************************************************************************/
+			/* *************************************************************************************************** */
 		}
 		world.getObject = (objectName) => {
 			let searchForObject = () => {
@@ -220,13 +224,13 @@ class Miaam {
 		};
 
 		function Makeplayer() {
-			//const player = new PIXI.Sprite(playerTex);
+			// const player = new PIXI.Sprite(playerTex);
 			let objlayer = world.getObject('objects');
 			player.sprite.x = objlayer.objects[0].x;
 			player.sprite.y = objlayer.objects[0].y;
 			objlayer.addChild(player.sprite);
 		}
-		console.log(world);
+		// console.log(world);
 		return world;
 	}
 }
