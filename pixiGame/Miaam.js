@@ -1,10 +1,6 @@
 import * as PIXI from 'pixi.js';
 
 class Miaam {
-	// 	constructor(player) {
-	// 		this.player = player;
-	// 		// console.log(this);
-	// 	}
 	setPlayer(player) {
 		this.player = player;
 	}
