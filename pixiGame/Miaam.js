@@ -222,9 +222,9 @@ class Miaam {
 		function Makeplayer() {
 			// const player = new PIXI.Sprite(playerTex);
 			let objlayer = world.getObject('objects');
-			player.sprite.x = objlayer.objects[0].x;
-			player.sprite.y = objlayer.objects[0].y;
-			objlayer.addChild(player.sprite);
+			player.playerSprite.x = objlayer.objects[0].x;
+			player.playerSprite.y = objlayer.objects[0].y;
+			objlayer.addChild(player.playerSprite);
 		}
 		// console.log(world);
 		return world;

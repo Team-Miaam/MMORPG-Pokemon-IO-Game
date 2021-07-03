@@ -1,0 +1,47 @@
+{"frames": {
+
+"playerMoveMent-0.png":
+{
+	"frame": {"x":7,"y":145,"w":46,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":10,"y":7,"w":46,"h":54},
+	"sourceSize": {"w":46,"h":54}
+},
+"playerMoveMent-1.png":
+{
+	"frame": {"x":7,"y":7,"w":46,"h":55},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":10,"y":6,"w":46,"h":55},
+	"sourceSize": {"w":46,"h":55}
+},
+"playerMoveMent-2.png":
+{
+	"frame": {"x":7,"y":145,"w":46,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":10,"y":7,"w":46,"h":54},
+	"sourceSize": {"w":46,"h":54}
+},
+"playerMoveMent-3.png":
+{
+	"frame": {"x":7,"y":76,"w":46,"h":55},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":10,"y":6,"w":46,"h":55},
+	"sourceSize": {"w":46,"h":55}
+}},
+"animations": {
+	"playerMoveMent": ["playerMoveMent-0.png","playerMoveMent-1.png","playerMoveMent-2.png","playerMoveMent-3.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "playerMoveMent-0.png",
+	"format": "RGBA8888",
+	"size": {"w":60,"h":206},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:68fb2d3fd32693475aa35672bb5c42b4:6be26c0bab831db755d85642ce39752b:9773e2c366b503f65043a6e4fbd51b8e$"
+}
+}

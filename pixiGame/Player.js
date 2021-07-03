@@ -1,9 +1,10 @@
+import * as PIXI from 'pixi.js';
 import keyboard from './keyboard';
 
 class Player {
-	constructor(playerSprite) {
-		this.sprite = playerSprite;
-	}
+	// constructor(playerSprite) {
+	// 	this.sprite = playerSprite;
+	// }
 
 	vx = 0;
 
@@ -22,6 +23,12 @@ class Player {
 	right = keyboard('ArrowRight');
 
 	down = keyboard('ArrowDown');
+
+	playerSheet = {};
+
+	playerSpriteLocation = '/pixiGame/images/playerMoveMent.png';
+
+	playerSprite;
 }
 
 export default Player;

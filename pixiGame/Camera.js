@@ -81,10 +81,14 @@ function worldCamera(world, worldWidth, worldHeight, canvas) {
 			}
 		},
 		// Use the `centerOver` method to center the camera over a sprite
-		centerOver(sprite) {
+		centerOver(player) {
 			// Center the camera over a sprite
-			this.x = sprite.x + sprite.width / 2 - this.width / 2;
-			this.y = sprite.y + sprite.height / 2 - this.height / 2;
+			this.x =
+				player.playerSprite.x + player.playerSprite.width / 2 - this.width / 2;
+			this.y =
+				player.playerSprite.y +
+				player.playerSprite.height / 2 -
+				this.height / 2;
 		},
 	};
 	// Return the `camera` object
