@@ -28,65 +28,15 @@ let downArrow, rightArrow, world;
 
 let g = new Miaam();
 app.loader.add('ash', player.playerSpriteLocation);
+player.playerBaseTexture = new PIXI.BaseTexture.from(
+	app.loader.resources['ash'].url
+);
 app.loader.load(doneloading);
 
 console.log(player);
 
-function createPlayerSheet() {
-	let ssheet = new PIXI.BaseTexture.from(app.loader.resources['ash'].url);
-
-	player.playerSheet['standSouth'] = [
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(0 * 68, 0 * 72, 68, 72)),
-	];
-	player.playerSheet['standWest'] = [
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(0 * 68, 1 * 72, 68, 72)),
-	];
-	player.playerSheet['standEast'] = [
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(0 * 68, 2 * 72, 68, 72)),
-	];
-	player.playerSheet['standNorth'] = [
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(0 * 68, 3 * 72, 68, 72)),
-	];
-
-	player.playerSheet['walkSouth'] = [
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(0 * 68, 0 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(1 * 68, 0 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(2 * 68, 0 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(3 * 68, 0 * 72, 68, 72)),
-	];
-	player.playerSheet['walkWest'] = [
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(0 * 68, 1 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(1 * 68, 1 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(2 * 68, 1 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(3 * 68, 1 * 72, 68, 72)),
-	];
-	player.playerSheet['walkEast'] = [
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(0 * 68, 2 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(1 * 68, 2 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(2 * 68, 2 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(3 * 68, 2 * 72, 68, 72)),
-	];
-	player.playerSheet['walkNorth'] = [
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(0 * 68, 3 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(1 * 68, 3 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(2 * 68, 3 * 72, 68, 72)),
-		new PIXI.Texture(ssheet, new PIXI.Rectangle(3 * 68, 3 * 72, 68, 72)),
-	];
-}
-
-function createPlayer() {
-	player.playerSprite = new PIXI.AnimatedSprite(player.playerSheet.standSouth);
-	player.playerSprite.anchor.set(0.5);
-	player.playerSprite.animationSpeed = 0.1;
-	player.playerSprite.loop = false;
-	player.playerSprite.play();
-}
-
 function setup() {
-	console.log('baaaaaaaaaaaaaaaaaaaaaaaaaaaaal');
 	console.log(world.x);
-
-	// camera.centerOver(player.sprite);
 
 	player.left.press = () => {
 		console.log('left');
@@ -173,13 +123,11 @@ function setup() {
 	};
 }
 
-console.log(world);
-
 /* --------------------- game loop ------------------- */
 
 function doneloading() {
-	createPlayerSheet();
-	createPlayer();
+	player.createPlayerSheet();
+	player.createPlayer();
 	console.log(player.playerSprite);
 	g.setPlayer(player);
 	world = g.makeTiledWorld(
@@ -198,14 +146,6 @@ function doneloading() {
 
 		camera.follow(player.playerSprite);
 		console.log(world.x, world.y);
-		// count += 0.005;
-		// player.sprite.x += player.vx;
-		// if (!(player.sprite.x < 950) || !(player.sprite.x > 10)) {
-		// 	player.sprite.anchor.set(0.5);
-		// 	player.sprite.scale.x *= -1;
-		// 	player.vx *= -1;
-		// 	console.log(player.sprite.x);
-		// }
 	});
 }
 
