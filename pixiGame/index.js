@@ -14,9 +14,6 @@ let app = new PIXI.Application({
 document.body.appendChild(app.view);
 
 /* ------------varaibles-------------- */
-
-let playerTex = new PIXI.Texture.from('./images/enemy.png');
-let playerSprite = new PIXI.Sprite(playerTex);
 let player = new Player();
 let camera;
 let world;
@@ -24,6 +21,7 @@ let world;
 /* ------------------ setting up game world---------------------- */
 
 let g = new Miaam();
+
 app.loader.add('ash', player.playerSpriteLocation);
 player.playerBaseTexture = new PIXI.BaseTexture.from(
 	app.loader.resources['ash'].url
