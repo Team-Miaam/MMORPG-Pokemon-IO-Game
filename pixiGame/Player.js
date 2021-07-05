@@ -19,6 +19,8 @@ class Player {
 
 	hp = 30;
 
+	velocity = 1;
+
 	left = keyboard('ArrowLeft');
 
 	up = keyboard('ArrowUp');
@@ -252,7 +254,7 @@ class Player {
 				this.playerSprite.loop = true;
 			}
 			// Change the player's velocity when the key is pressed
-			this.vx = -3;
+			this.vx = -this.velocity;
 			this.vy = 0;
 			console.log(this.vx, this.vy);
 		};
@@ -276,7 +278,7 @@ class Player {
 				this.playerSprite.play();
 				this.playerSprite.loop = true;
 			}
-			this.vy = -3;
+			this.vy = -this.velocity;
 			this.vx = 0;
 			console.log(this.vx, this.vy);
 		};
@@ -296,7 +298,7 @@ class Player {
 				this.playerSprite.loop = true;
 				this.playerSprite.play();
 			}
-			this.vx = 3;
+			this.vx = this.velocity;
 			this.vy = 0;
 			console.log(this.vx, this.vy);
 		};
@@ -316,7 +318,7 @@ class Player {
 				this.playerSprite.loop = true;
 				this.playerSprite.play();
 			}
-			this.vy = 3;
+			this.vy = this.velocity;
 			this.vx = 0;
 			console.log(this.vx, this.vy);
 		};
