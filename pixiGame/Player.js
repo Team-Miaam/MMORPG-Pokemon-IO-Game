@@ -5,9 +5,11 @@ class Player {
 	// constructor(playerSprite) {
 	// 	this.sprite = playerSprite;
 	// }
-	playerWidth = 68;
+	playerWidth = 32;
 
-	playerHeight = 72;
+	playerHeight = 34;
+
+	didHit;
 
 	vx = 0;
 
@@ -29,7 +31,7 @@ class Player {
 
 	playerSheet = {};
 
-	playerSpriteLocation = '/pixiGame/images/playerMoveMent.png';
+	playerSpriteLocation = '/pixiGame/images/Webp.net-resizeimage.png';
 
 	playerSprite;
 
@@ -245,7 +247,7 @@ class Player {
 
 	playerMovement() {
 		this.left.press = () => {
-			console.log('left');
+			// console.log('left');
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkWest;
 				this.playerSprite.play();
@@ -254,7 +256,7 @@ class Player {
 			// Change the player's velocity when the key is pressed
 			this.vx = -3;
 			this.vy = 0;
-			console.log(this.vx, this.vy);
+			// console.log(this.vx, this.vy);
 		};
 
 		// Left arrow key `release` method
@@ -270,7 +272,7 @@ class Player {
 		};
 		// Up
 		this.up.press = () => {
-			console.log('up');
+			// console.log('up');
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkNorth;
 				this.playerSprite.play();
@@ -278,7 +280,7 @@ class Player {
 			}
 			this.vy = -3;
 			this.vx = 0;
-			console.log(this.vx, this.vy);
+			// console.log(this.vx, this.vy);
 		};
 		this.up.release = () => {
 			if (!this.down.isDown && this.vx === 0) {
@@ -290,7 +292,7 @@ class Player {
 
 		// Right
 		this.right.press = () => {
-			console.log('right');
+			// console.log('right');
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkEast;
 				this.playerSprite.loop = true;
@@ -298,7 +300,7 @@ class Player {
 			}
 			this.vx = 3;
 			this.vy = 0;
-			console.log(this.vx, this.vy);
+			// console.log(this.vx, this.vy);
 		};
 		this.right.release = () => {
 			if (!this.left.isDown && this.vy === 0) {
@@ -310,7 +312,7 @@ class Player {
 
 		// Down
 		this.down.press = () => {
-			console.log('down');
+			// console.log('down');
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkSouth;
 				this.playerSprite.loop = true;
@@ -318,7 +320,7 @@ class Player {
 			}
 			this.vy = 3;
 			this.vx = 0;
-			console.log(this.vx, this.vy);
+			// console.log(this.vx, this.vy);
 		};
 		this.down.release = () => {
 			if (!this.up.isDown && this.vx === 0) {

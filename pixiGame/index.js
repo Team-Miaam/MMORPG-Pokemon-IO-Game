@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import Bump from './bump';
 import Miaam from './Miaam';
 import Player from './Player';
 import worldCamera from './Camera';
@@ -57,7 +58,8 @@ function doneloading() {
 		player.playerSprite.y += player.vy;
 
 		camera.follow(player.playerSprite);
-		console.log(world.x, world.y);
+		// console.log(world.x, world.y);
+		console.log(player.didHit);
 	});
 }
 

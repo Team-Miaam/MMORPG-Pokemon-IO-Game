@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import Bump from './bump';
 
 class Miaam {
 	setPlayer(player) {
@@ -7,6 +8,7 @@ class Miaam {
 
 	makeTiledWorld(jsonTiledMap, tileset, stage) {
 		// loader
+		let b = new Bump(PIXI);
 		let player = this.player;
 		let loader = PIXI.Loader.shared;
 		let world = new PIXI.Container();
@@ -143,6 +145,9 @@ class Miaam {
 							// Make a record of the sprite's `gid` on the tileset. This will also be useful for collision detection later
 							tileSprite.gid = gid;
 							// Add the sprite to the current layer group
+							if (tiledLayer.name === 'obstacle') {
+								player.didHit = b.hit(tileSprite, player.playerSprite);
+							}
 							world.addChild(tileSprite);
 						}
 					});

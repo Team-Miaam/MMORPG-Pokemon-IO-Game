@@ -1629,3 +1629,5 @@ class Bump {
 		}
 	}
 }
+
+export default Bump;
