@@ -8,7 +8,8 @@
 		"format": "prettier --write .",
 		"lint": "eslint .",
 		"build": "webpack",
-		"devbuild": "webpack --watch"
+		"devbuild": "webpack --watch",
+		"start": "ls"
 	},
 	"repository": {
 		"type": "git",
