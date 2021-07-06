@@ -1,15 +1,32 @@
-{
-	"columns": 8,
-	"image": "../images/worldtileset.png",
-	"imageheight": 20832,
-	"imagewidth": 256,
-	"margin": 0,
-	"name": "worldtileset",
-	"spacing": 0,
-	"tilecount": 5208,
-	"tiledversion": "1.4.3",
-	"tileheight": 32,
-	"tilewidth": 32,
-	"type": "tileset",
-	"version": 1.4
+{ "columns":8,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"",
+         "target":"."
+        }
+    },
+ "image":"..\/images\/worldtileset.png",
+ "imageheight":20832,
+ "imagewidth":256,
+ "margin":0,
+ "name":"worldtileset",
+ "spacing":0,
+ "tilecount":5208,
+ "tiledversion":"1.4.3",
+ "tileheight":32,
+ "tiles":[
+        {
+         "id":446,
+         "properties":[
+                {
+                 "name":"name",
+                 "type":"string",
+                 "value":"obstacle"
+                }]
+        }],
+ "tilewidth":32,
+ "type":"tileset",
+ "version":1.4
 }

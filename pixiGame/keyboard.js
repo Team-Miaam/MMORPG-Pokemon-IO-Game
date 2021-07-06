@@ -8,7 +8,9 @@ function keyboard(value) {
 	// The `downHandler`
 	key.downHandler = (event) => {
 		if (event.key === key.value) {
-			if (key.isUp && key.press) key.press();
+			if (key.isUp && key.press) {
+				key.press();
+			}
 			key.isDown = true;
 			key.isUp = false;
 			event.preventDefault();
@@ -18,7 +20,9 @@ function keyboard(value) {
 	// The `upHandler`
 	key.upHandler = (event) => {
 		if (event.key === key.value) {
-			if (key.isDown && key.release) key.release();
+			if (key.isDown && key.release) {
+				key.release();
+			}
 			key.isDown = false;
 			key.isUp = true;
 			event.preventDefault();

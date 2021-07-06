@@ -247,7 +247,6 @@ class Player {
 
 	playerMovement() {
 		this.left.press = () => {
-			// console.log('left');
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkWest;
 				this.playerSprite.play();
@@ -256,7 +255,9 @@ class Player {
 			// Change the player's velocity when the key is pressed
 			this.vx = -3;
 			this.vy = 0;
-			// console.log(this.vx, this.vy);
+			this.down.isUp = false;
+			this.up.isUp = false;
+			this.right.isUp = false;
 		};
 
 		// Left arrow key `release` method
@@ -269,10 +270,12 @@ class Player {
 				this.playerSprite.textures = this.playerSheet.standWest;
 				this.playerSprite.loop = false;
 			}
+			this.down.isUp = true;
+			this.up.isUp = true;
+			this.right.isUp = true;
 		};
 		// Up
 		this.up.press = () => {
-			// console.log('up');
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkNorth;
 				this.playerSprite.play();
@@ -280,7 +283,9 @@ class Player {
 			}
 			this.vy = -3;
 			this.vx = 0;
-			// console.log(this.vx, this.vy);
+			this.down.isUp = false;
+			this.left.isUp = false;
+			this.right.isUp = false;
 		};
 		this.up.release = () => {
 			if (!this.down.isDown && this.vx === 0) {
@@ -288,11 +293,13 @@ class Player {
 				this.playerSprite.textures = this.playerSheet.standNorth;
 				this.playerSprite.loop = false;
 			}
+			this.down.isUp = true;
+			this.left.isUp = true;
+			this.right.isUp = true;
 		};
 
 		// Right
 		this.right.press = () => {
-			// console.log('right');
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkEast;
 				this.playerSprite.loop = true;
@@ -300,7 +307,9 @@ class Player {
 			}
 			this.vx = 3;
 			this.vy = 0;
-			// console.log(this.vx, this.vy);
+			this.down.isUp = false;
+			this.up.isUp = false;
+			this.left.isUp = false;
 		};
 		this.right.release = () => {
 			if (!this.left.isDown && this.vy === 0) {
@@ -308,11 +317,14 @@ class Player {
 				this.playerSprite.textures = this.playerSheet.standEast;
 				this.playerSprite.loop = false;
 			}
+			this.down.isUp = true;
+			this.up.isUp = true;
+			this.left.isUp = true;
 		};
 
 		// Down
 		this.down.press = () => {
-			// console.log('down');
+			console.log(this.down);
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkSouth;
 				this.playerSprite.loop = true;
@@ -320,7 +332,9 @@ class Player {
 			}
 			this.vy = 3;
 			this.vx = 0;
-			// console.log(this.vx, this.vy);
+			this.right.isUp = false;
+			this.up.isUp = false;
+			this.left.isUp = false;
 		};
 		this.down.release = () => {
 			if (!this.up.isDown && this.vx === 0) {
@@ -328,6 +342,9 @@ class Player {
 				this.playerSprite.textures = this.playerSheet.standSouth;
 				this.playerSprite.loop = false;
 			}
+			this.right.isUp = true;
+			this.up.isUp = true;
+			this.left.isUp = true;
 		};
 	}
 }

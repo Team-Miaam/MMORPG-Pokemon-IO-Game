@@ -47,8 +47,9 @@ function doneloading() {
 	camera = worldCamera(world, 960, 960);
 	app.stage.addChild(world);
 	camera.centerOver(player);
+
 	setup();
-	// console.log(world);
+	console.log(world);
 	app.ticker.add((delta) => {
 		// camera.follow(player.sprite);
 		player.playerSprite.x += player.vx;
