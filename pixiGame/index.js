@@ -39,8 +39,8 @@ function doneloading() {
 	player.createPlayer();
 	g.setPlayer(player);
 	const world = g.makeTiledWorld(
-		'./JSON/worldtile.json',
-		'./images/worldtilesetmini2.png',
+		'./pixiGame/JSON/worldtile.json',
+		'./pixiGame/images/worldtilesetmini2.png',
 		app.stage
 	);
 	camera = worldCamera(world, 960, 960);

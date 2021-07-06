@@ -33,7 +33,7 @@ class Player {
 
 	playerSheet = {};
 
-	playerSpriteLocation = '/pixiGame/images/Webp.net-resizeimage.png';
+	playerSpriteLocation = './pixiGame/images/Webp.net-resizeimage.png';
 
 	playerSprite;
 
