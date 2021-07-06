@@ -16,7 +16,6 @@ document.body.appendChild(app.view);
 /* ------------varaibles-------------- */
 let player = new Player();
 let camera;
-let world;
 /* ------------------ setting up game world---------------------- */
 
 let g = new Miaam();
@@ -39,7 +38,7 @@ function doneloading() {
 	player.createPlayerSheet();
 	player.createPlayer();
 	g.setPlayer(player);
-	world = g.makeTiledWorld(
+	const world = g.makeTiledWorld(
 		'./JSON/worldtile.json',
 		'./images/worldtilesetmini2.png',
 		app.stage
@@ -49,17 +48,34 @@ function doneloading() {
 	camera.centerOver(player);
 
 	setup();
-	console.log(world);
+	let index = {};
+	let xOff = 8;
+	let yOff = 24;
+	console.log(`Tiled Map:`);
 	app.ticker.add((delta) => {
 		// camera.follow(player.sprite);
+		camera.follow(player.playerSprite);
 		player.playerSprite.x += player.vx;
 		player.playerSprite.y += player.vy;
 
-		camera.follow(player.playerSprite);
-		// console.log(player.playerSprite);
-		// player.didHit = b.hit(player.playerSprite, world.obstacle);
-
-		// console.log(world.x, world.y);
+		if (world.tiledMap) {
+			index.pos =
+				Math.floor((player.playerSprite.y + yOff) / world.tiledMap.tileheight) *
+					30 +
+				Math.floor((player.playerSprite.x + xOff) / world.tiledMap.tilewidth);
+			index.neg =
+				Math.floor((player.playerSprite.y + yOff) / world.tiledMap.tileheight) *
+					30 +
+				Math.floor((player.playerSprite.x - xOff) / world.tiledMap.tilewidth);
+			if (
+				world.tiledMap.layers[1].data[index.pos] !== 0 ||
+				world.tiledMap.layers[1].data[index.neg] !== 0
+			) {
+				console.log(index, world.tiledMap.layers[1].data[index]);
+				player.playerSprite.x -= player.vx;
+				player.playerSprite.y -= player.vy;
+			}
+		}
 	});
 }
 
