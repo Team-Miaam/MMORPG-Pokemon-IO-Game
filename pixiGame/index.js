@@ -11,7 +11,7 @@ let app = new PIXI.Application({
 	transparent: false,
 	resolution: 1,
 });
-document.body.appendChild(app.view);
+
 
 /* ------------varaibles-------------- */
 let player = new Player();
@@ -35,6 +35,7 @@ function setup() {
 /* --------------------- game loop ------------------- */
 
 function doneloading() {
+	document.getElementById("canvas").appendChild(app.view);
 	player.createPlayerSheet();
 	player.createPlayer();
 	g.setPlayer(player);
