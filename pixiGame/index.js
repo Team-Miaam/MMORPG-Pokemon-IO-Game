@@ -26,7 +26,7 @@ player.playerBaseTexture = new PIXI.BaseTexture.from(
 );
 app.loader.load(doneloading);
 
-console.log(player);
+// console.log(player);
 
 function setup() {
 	player.playerMovement();
@@ -51,7 +51,7 @@ function doneloading() {
 	let index = {};
 	let xOff = 0;
 	let yOff = 8;
-	console.log(`Tiled Map:`);
+	// console.log(`Tiled Map:`);
 	app.ticker.add((delta) => {
 		// camera.follow(player.sprite);
 		camera.follow(player.playerSprite);
@@ -71,7 +71,7 @@ function doneloading() {
 				world.tiledMap.layers[1].data[index.pos] !== 0 ||
 				world.tiledMap.layers[1].data[index.neg] !== 0
 			) {
-				console.log(index, world.tiledMap.layers[1].data[index]);
+				// console.log(index, world.tiledMap.layers[1].data[index]);
 				player.playerSprite.x -= player.vx;
 				player.playerSprite.y -= player.vy;
 			}

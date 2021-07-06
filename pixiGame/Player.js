@@ -326,7 +326,7 @@ class Player {
 
 		// Down
 		this.down.press = () => {
-			console.log(this.down);
+			// console.log(this.down);
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkSouth;
 				this.playerSprite.loop = true;
