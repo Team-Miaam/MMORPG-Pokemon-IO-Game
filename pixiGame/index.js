@@ -50,7 +50,7 @@ function doneloading() {
 	setup();
 	let index = {};
 	let xOff = 0;
-	let yOff = 8;
+	let yOff = 10.5;
 	console.log(`Tiled Map:`);
 	app.ticker.add((delta) => {
 		// camera.follow(player.sprite);
