@@ -35,6 +35,8 @@ class Player {
 
 	playerSpriteLocation = '/pixiGame/images/Webp.net-resizeimage.png';
 
+	playerAnimationJson = '/pixiGame/JSON/playerAnimation.json';
+
 	playerSprite;
 
 	playerBaseTexture;
@@ -245,6 +247,21 @@ class Player {
 		this.playerSprite.animationSpeed = 0.1;
 		this.playerSprite.loop = false;
 		this.playerSprite.play();
+	}
+
+	playerSetup() {
+		this.createPlayerSheet();
+		this.createPlayer();
+	}
+
+	playerAnimationLoadProto(app) {
+		app.loader
+			.add('player', this.playerSpriteLocation)
+			.add('playerjson', this.playerAnimationJson);
+		this.playerBaseTexture = new PIXI.BaseTexture.from(
+			app.loader.resources['player'].url
+		);
+		app.loader.load();
 	}
 
 	playerMovement() {

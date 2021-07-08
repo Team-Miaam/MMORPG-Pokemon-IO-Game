@@ -20,27 +20,11 @@ let camera;
 
 let g = new Miaam();
 
-function playerAnimationLoadProto(animJson, animSpritesheet) {
-	app.loader.add('player', animSpritesheet).add('playerjson', animJson);
-	player.playerBaseTexture = new PIXI.BaseTexture.from(
-		app.loader.resources['player'].url
-	);
-	app.loader.load(setup);
-}
-
-playerAnimationLoadProto(
-	'./JSON/playerAnimation.json',
-	player.playerSpriteLocation
-);
-function playerSetup() {
-	player.createPlayerSheet();
-	player.createPlayer();
-}
-
 function setup() {
 	// let playerMetaData = app.loader.resources['playerjson'].data;
 	// console.log(playerMetaData);
-	playerSetup();
+	player.playerAnimationLoadProto(app);
+	player.playerSetup();
 	g.setPlayer(player);
 	const world = g.makeTiledWorld(
 		'./JSON/worldtile.json',
@@ -82,5 +66,7 @@ function setup() {
 		}
 	});
 }
+
+setup();
 
 // player control
