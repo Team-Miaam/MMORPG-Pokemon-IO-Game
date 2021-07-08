@@ -5,7 +5,7 @@ class Miaam {
 		this.player = player;
 	}
 
-	makeTiledWorld(jsonTiledMap, tileset, stage) {
+	makeTiledWorld(jsonTiledMap, tileset) {
 		// loader
 		let player = this.player;
 		let loader = PIXI.Loader.shared;

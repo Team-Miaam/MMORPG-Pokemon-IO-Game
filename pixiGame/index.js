@@ -20,38 +20,42 @@ let camera;
 
 let g = new Miaam();
 
-app.loader.add('ash', player.playerSpriteLocation);
-player.playerBaseTexture = new PIXI.BaseTexture.from(
-	app.loader.resources['ash'].url
-);
-app.loader.load(doneloading);
-
-console.log(player);
-
-function setup() {
-	player.playerMovement();
+function playerAnimationLoadProto(animJson, animSpritesheet) {
+	app.loader.add('player', animSpritesheet).add('playerjson', animJson);
+	player.playerBaseTexture = new PIXI.BaseTexture.from(
+		app.loader.resources['player'].url
+	);
+	app.loader.load(setup);
 }
 
-/* --------------------- game loop ------------------- */
-
-function doneloading() {
+playerAnimationLoadProto(
+	'./JSON/playerAnimation.json',
+	player.playerSpriteLocation
+);
+function playerSetup() {
 	player.createPlayerSheet();
 	player.createPlayer();
+}
+
+function setup() {
+	// let playerMetaData = app.loader.resources['playerjson'].data;
+	// console.log(playerMetaData);
+	playerSetup();
 	g.setPlayer(player);
 	const world = g.makeTiledWorld(
 		'./JSON/worldtile.json',
-		'./images/worldtilesetmini2.png',
-		app.stage
+		'./images/worldtilesetmini2.png'
 	);
 	camera = worldCamera(world, 960, 960);
 	app.stage.addChild(world);
 	camera.centerOver(player);
-
-	setup();
+	player.playerMovement();
 	let index = {};
 	let xOff = 0;
 	let yOff = 10.5;
 	console.log(`Tiled Map:`);
+
+	/* --------------------- game loop ------------------- */
 	app.ticker.add((delta) => {
 		// camera.follow(player.sprite);
 		camera.follow(player.playerSprite);
@@ -71,7 +75,7 @@ function doneloading() {
 				world.tiledMap.layers[1].data[index.pos] !== 0 ||
 				world.tiledMap.layers[1].data[index.neg] !== 0
 			) {
-				console.log(index, world.tiledMap.layers[1].data[index]);
+				// console.log(index, world.tiledMap.layers[1].data[index]);
 				player.playerSprite.x -= player.vx;
 				player.playerSprite.y -= player.vy;
 			}

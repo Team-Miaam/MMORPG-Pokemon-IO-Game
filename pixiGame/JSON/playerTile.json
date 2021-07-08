@@ -1,0 +1,14 @@
+{ "columns":4,
+ "image":"..\/images\/Webp.net-resizeimage.png",
+ "imageheight":136,
+ "imagewidth":128,
+ "margin":0,
+ "name":"Webp.net-resizeimage",
+ "spacing":0,
+ "tilecount":16,
+ "tiledversion":"1.4.3",
+ "tileheight":34,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":1.4
+}
