@@ -12,32 +12,50 @@ class Miaam {
 		let world = new PIXI.Container();
 		world.objects = [];
 		// loader.add(jsonTiledMap);
-		const load = (loader) => {
-			console.log('All files loaded');
-			world.tiledMap = loader.resources[jsonTiledMap].data;
-			world.worldWidth = world.tiledMap.width * world.tiledMap.tilewidth;
-			world.worldHeight = world.tiledMap.height * world.tiledMap.tileheight;
-			// Figure out how many columns there are on the tileset.
-			world.numberOfTilesetColumns = Math.floor(
-				world.tiledMap.imagewidth / world.tiledMap.tilewidth
-			);
-			spriteMaker();
+		world.tiledMap = jsonTiledMap.data;
+		world.worldWidth = world.tiledMap.width * world.tiledMap.tilewidth;
+		world.worldHeight = world.tiledMap.height * world.tiledMap.tileheight;
+		// Figure out how many columns there are on the tileset.
+		world.numberOfTilesetColumns = Math.floor(
+			world.tiledMap.imagewidth / world.tiledMap.tilewidth
+		);
+
+		world.getObject = (objectName) => {
+			let searchForObject = () => {
+				let foundObject;
+				world.objects.some((object) => {
+					if (object.name && object.name === objectName) {
+						foundObject = object;
+						return true;
+					}
+				});
+				if (foundObject) {
+					return foundObject;
+				} else {
+					throw new Error(
+						'There is no object with the property name: ' + objectName
+					);
+				}
+			};
+			return searchForObject();
 		};
 
-		function loadProgressHandler(loader, resource) {
-			// Display the file `url` currently being loaded
-			console.log('loading: ' + resource.url);
+		world.getObjects = (objectName) => {
+			let foundObjects = [];
+			world.objects.forEach((object) => {
+				if (object.name && objectName.indexOf(object.name) !== -1) {
+					foundObjects.push(object);
+				}
+			});
+			if (foundObjects.length > 0) {
+				return foundObjects;
+			} else {
+				throw new Error('Couldnt find those objects');
+			}
+			return foundObjects;
+		};
 
-			// Display the percentage of files currently loaded
-			console.log('progress: ' + loader.progress + '%');
-			// If you gave your files names as the first argument
-			// of the `add` method, you can access them like this
-			// console.log("loading: " + resource.name);
-		}
-		loader.add(jsonTiledMap).load(load);
-		loader.onProgress.add(loadProgressHandler);
-
-		// shows progress loading objects
+		spriteMaker();
 
 		function frame(source, x, y, width, height) {
 			let texture;
@@ -45,21 +63,12 @@ class Miaam {
 			// console.log(PIXI.utils.TextureCache);
 			// If the source is a string, it's either a texture in the
 			// cache or an image file
-			if (typeof source === 'string') {
-				if (PIXI.utils.TextureCache[source]) {
-					// console.log(PIXI.utils.TextureCache[source]);
-					texture = new PIXI.Texture(PIXI.utils.TextureCache[source]);
-				} else {
-					texture = new PIXI.Texture.from(source);
-				}
-			}
-
 			// If the `source` is a texture,  use it
-			else if (source instanceof PIXI.Texture) {
+			if (source instanceof PIXI.Texture) {
 				texture = new PIXI.Texture(source);
 			}
 			if (!texture) {
-				throw new Error(`Please load the ${source} texture into the cache.`);
+				throw new Error(`Please load the ${source} texture`);
 			} else {
 				// console.log(texture);
 				let sprite = new PIXI.Sprite(texture);
@@ -180,39 +189,6 @@ class Miaam {
 			Makeplayer();
 			/* *************************************************************************************************** */
 		}
-		world.getObject = (objectName) => {
-			let searchForObject = () => {
-				let foundObject;
-				world.objects.some((object) => {
-					if (object.name && object.name === objectName) {
-						foundObject = object;
-						return true;
-					}
-				});
-				if (foundObject) {
-					return foundObject;
-				} else {
-					throw new Error(
-						'There is no object with the property name: ' + objectName
-					);
-				}
-			};
-			return searchForObject();
-		};
-		world.getObjects = (objectName) => {
-			let foundObjects = [];
-			world.objects.forEach((object) => {
-				if (object.name && objectName.indexOf(object.name) !== -1) {
-					foundObjects.push(object);
-				}
-			});
-			if (foundObjects.length > 0) {
-				return foundObjects;
-			} else {
-				throw new Error('Couldnt find those objects');
-			}
-			return foundObjects;
-		};
 
 		function Makeplayer() {
 			let objlayer = world.getObject('objects');

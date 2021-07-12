@@ -33,13 +33,17 @@ class Player {
 
 	playerSheet = {};
 
-	playerSpriteLocation = '/pixiGame/images/Webp.net-resizeimage.png';
-
-	playerAnimationJson = '/pixiGame/JSON/playerAnimation.json';
-
 	playerSprite;
 
 	playerBaseTexture;
+
+	constructor(playerSprite, playerAnimationJson) {
+		this.playerAnimationJson = playerAnimationJson;
+		this.playerSprite = playerSprite;
+		this.playerBaseTexture = new PIXI.BaseTexture(playerSprite.url);
+		this.createPlayerSheet();
+		this.createPlayer();
+	}
 
 	createPlayerSheet() {
 		this.playerSheet['standSouth'] = [
@@ -249,21 +253,6 @@ class Player {
 		this.playerSprite.play();
 	}
 
-	playerSetup() {
-		this.createPlayerSheet();
-		this.createPlayer();
-	}
-
-	playerAnimationLoadProto(app) {
-		app.loader
-			.add('player', this.playerSpriteLocation)
-			.add('playerjson', this.playerAnimationJson);
-		this.playerBaseTexture = new PIXI.BaseTexture.from(
-			app.loader.resources['player'].url
-		);
-		app.loader.load();
-	}
-
 	playerMovement() {
 		this.left.press = () => {
 			if (!this.playerSprite.playing) {
@@ -343,7 +332,6 @@ class Player {
 
 		// Down
 		this.down.press = () => {
-			console.log(this.down);
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkSouth;
 				this.playerSprite.loop = true;

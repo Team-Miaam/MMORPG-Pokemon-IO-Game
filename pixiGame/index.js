@@ -4,7 +4,7 @@ import Player from './Player';
 import worldCamera from './Camera';
 
 /* ------ pixi init -------- */
-let app = new PIXI.Application({
+const app = new PIXI.Application({
 	width: 512,
 	height: 512,
 	antialias: true,
@@ -13,31 +13,30 @@ let app = new PIXI.Application({
 });
 document.body.appendChild(app.view);
 
-/* ------------varaibles-------------- */
-let player = new Player();
-let camera;
-/* ------------------ setting up game world---------------------- */
+function setup(loader, resources) {
+	console.log(resources);
+	/* ------------varaibles-------------- */
+	/* ------------------ setting up game world---------------------- */
 
-let g = new Miaam();
-
-function setup() {
+	const game = new Miaam();
+	const player = new Player(
+		resources.playerSpritePNG,
+		resources.playerAnimationJSON
+	);
 	// let playerMetaData = app.loader.resources['playerjson'].data;
 	// console.log(playerMetaData);
-	player.playerAnimationLoadProto(app);
-	player.playerSetup();
-	g.setPlayer(player);
-	const world = g.makeTiledWorld(
-		'./JSON/worldtile.json',
-		'./images/worldtilesetmini2.png'
+	game.setPlayer(player);
+	const world = game.makeTiledWorld(
+		resources.worldTileMapJSON,
+		resources.worldTileSetPNG.texture
 	);
-	camera = worldCamera(world, 960, 960);
+	const camera = worldCamera(world, 960, 960);
 	app.stage.addChild(world);
 	camera.centerOver(player);
 	player.playerMovement();
 	let index = {};
 	let xOff = 0;
 	let yOff = 10.5;
-	console.log(`Tiled Map:`);
 
 	/* --------------------- game loop ------------------- */
 	app.ticker.add((delta) => {
@@ -67,6 +66,9 @@ function setup() {
 	});
 }
 
-setup();
-
-// player control
+app.loader
+	.add('worldTileMapJSON', './JSON/worldTile.json')
+	.add('worldTileSetPNG', './images/worldtilesetmini2.png')
+	.add('playerSpritePNG', './images/Webp.net-resizeimage.png')
+	.add('playerAnimationJSON', './JSON/playerAnimation.json')
+	.load(setup);
