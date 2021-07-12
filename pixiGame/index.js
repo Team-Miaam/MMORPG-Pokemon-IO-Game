@@ -26,8 +26,12 @@ function setup(loader, resources) {
 	// let playerMetaData = app.loader.resources['playerjson'].data;
 	// console.log(playerMetaData);
 	game.setPlayer(player);
-	const world = game.makeTiledWorld(
+	let world = game.makeTiledWorld(
 		resources.worldTileMapJSON,
+		resources.worldTileSetPNG.texture
+	);
+	world = game.makeTiledWorld(
+		resources.worldTileMapScene2JSON,
 		resources.worldTileSetPNG.texture
 	);
 	const camera = worldCamera(world, 960, 960);
@@ -68,6 +72,7 @@ function setup(loader, resources) {
 
 app.loader
 	.add('worldTileMapJSON', './JSON/worldTile.json')
+	.add('worldTileMapScene2JSON', './JSON/worldtileScene2.json')
 	.add('worldTileSetPNG', './images/worldtilesetmini2.png')
 	.add('playerSpritePNG', './images/Webp.net-resizeimage.png')
 	.add('playerAnimationJSON', './JSON/playerAnimation.json')
