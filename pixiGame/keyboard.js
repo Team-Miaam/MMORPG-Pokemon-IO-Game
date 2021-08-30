@@ -7,6 +7,7 @@ function keyboard(value) {
 	key.release = undefined;
 	// The `downHandler`
 	key.downHandler = (event) => {
+		console.log(event.key);
 		if (event.key === key.value) {
 			if (key.isUp && key.press) key.press();
 			key.isDown = true;

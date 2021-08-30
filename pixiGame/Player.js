@@ -37,7 +37,10 @@ class Player {
 
 	playerBaseTexture;
 
+	playerJsonContainer = new PIXI.Container();
+
 	createPlayerSheet() {
+		// let
 		this.playerSheet['standSouth'] = [
 			new PIXI.Texture(
 				this.playerBaseTexture,
@@ -245,6 +248,30 @@ class Player {
 		this.playerSprite.play();
 	}
 
+<<<<<<< Updated upstream
+=======
+	playerSetup() {
+		this.createPlayerSheet();
+		this.createPlayer();
+	}
+
+	playerAnimationLoadProto(app) {
+		app.loader
+			.add('player', this.playerSpriteLocation)
+			.add('playerjson', this.playerAnimationJson);
+		this.playerBaseTexture = new PIXI.BaseTexture.from(
+			app.loader.resources['player'].url
+		);
+
+		app.loader.onComplete.add(() => {
+			this.playerJsonFile = app.loader.resources['playerjson'].data;
+			this.playerWidth = this.playerJsonFile.tilewidth;
+			this.playerHeight = this.playerJsonFile.tileheight;
+		});
+		app.loader.load();
+	}
+
+>>>>>>> Stashed changes
 	playerMovement() {
 		this.left.press = () => {
 			console.log('left');
@@ -312,7 +339,10 @@ class Player {
 
 		// Down
 		this.down.press = () => {
+<<<<<<< Updated upstream
 			console.log('down');
+=======
+>>>>>>> Stashed changes
 			if (!this.playerSprite.playing) {
 				this.playerSprite.textures = this.playerSheet.walkSouth;
 				this.playerSprite.loop = true;

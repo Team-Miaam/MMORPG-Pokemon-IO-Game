@@ -2,6 +2,8 @@ import * as PIXI from 'pixi.js';
 import Miaam from './Miaam';
 import Player from './Player';
 import worldCamera from './Camera';
+import { Text } from 'pixi.js';
+import TextManager from './TextManager';
 
 /* ------ pixi init -------- */
 let app = new PIXI.Application({
@@ -18,8 +20,9 @@ let player = new Player();
 let camera;
 
 /* ------------------ setting up game world---------------------- */
-
+let textManager = new TextManager();
 let g = new Miaam();
+// let g2 = new Miaam();
 
 app.loader.add('ash', player.playerSpriteLocation);
 player.playerBaseTexture = new PIXI.BaseTexture.from(
@@ -30,6 +33,7 @@ app.loader.load(doneloading);
 console.log(player);
 
 function setup() {
+<<<<<<< Updated upstream
 	player.playerMovement();
 }
 
@@ -44,14 +48,44 @@ function doneloading() {
 		'./JSON/worldtile.json',
 		'./images/worldtilesetmini2.png',
 		app.stage
+=======
+	player.playerAnimationLoadProto(app);
+	player.playerSetup();
+	g.setPlayer(player);
+	let world;
+	textManager.getApp(app);
+	// world = g.makeTiledWorld(
+	// 	'./JSON/worldtile.json',
+	// 	'./images/worldtilesetmini2.png'
+	// );
+	// // console.log(world);
+	// g.resetLoader();
+	// console.log(world);
+	world = g.makeTiledWorld(
+		'./JSON/level2.json',
+		'./images/worldtilesetmini2.png'
+>>>>>>> Stashed changes
 	);
 	camera = worldCamera(world, 960, 960);
 	app.stage.addChild(world);
+	textManager.textKeyboardControl();
+	let smltext = 'player pos: ';
+	let smltexttt = 'aflkhauhehgouhgouohwoeeghauieg';
+
+	let smallText = new PIXI.Text(smltext);
+
+	// app.stage.addChild(textManager.textBoxinit());
+	//	app.stage.addChild(smallText);
 	camera.centerOver(player);
 	setup();
 	let index = {};
+<<<<<<< Updated upstream
 	let xOff = 8;
 	let yOff = 24;
+=======
+	let xOff = 0; // modulo(tile_Width - player_Width)
+	let yOff = 11; // modulo(tile_Height - player_HEIGHT) + 9;
+>>>>>>> Stashed changes
 	console.log(`Tiled Map:`);
 	app.ticker.add((delta) => {
 		// camera.follow(player.sprite);
@@ -77,6 +111,8 @@ function doneloading() {
 				player.playerSprite.y -= player.vy;
 			}
 		}
+		smallText.text =
+			smltext + player.playerSprite.x + ' ' + player.playerSprite.y;
 	});
 }
 

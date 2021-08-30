@@ -1,5 +1,4 @@
 function worldCamera(world, worldWidth, worldHeight, canvas) {
-	// Define a `camera` object with helpful properties
 	// console.log(world);
 	let camera = {
 		width: 512,

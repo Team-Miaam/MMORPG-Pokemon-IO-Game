@@ -5,16 +5,22 @@ class Miaam {
 		this.player = player;
 	}
 
+<<<<<<< Updated upstream
 	makeTiledWorld(jsonTiledMap, tileset, stage) {
+=======
+	loader = PIXI.Loader.shared;
+
+	makeTiledWorld(jsonTiledMap, tileset) {
+>>>>>>> Stashed changes
 		// loader
 		let player = this.player;
-		let loader = PIXI.Loader.shared;
 		let world = new PIXI.Container();
 		world.objects = [];
 		// loader.add(jsonTiledMap);
 		const load = (loader) => {
 			console.log('All files loaded');
-			world.tiledMap = loader.resources[jsonTiledMap].data;
+			console.log(this.loader.resources[jsonTiledMap]);
+			world.tiledMap = this.loader.resources[jsonTiledMap].data;
 			world.worldWidth = world.tiledMap.width * world.tiledMap.tilewidth;
 			world.worldHeight = world.tiledMap.height * world.tiledMap.tileheight;
 			// Figure out how many columns there are on the tileset.
@@ -34,8 +40,8 @@ class Miaam {
 			// of the `add` method, you can access them like this
 			// console.log("loading: " + resource.name);
 		}
-		loader.add(jsonTiledMap).load(load);
-		loader.onProgress.add(loadProgressHandler);
+		this.loader.add(jsonTiledMap).load(load);
+		this.loader.onProgress.add(loadProgressHandler);
 
 		// shows progress loading objects
 
@@ -227,7 +233,14 @@ class Miaam {
 			objlayer.addChild(player.playerSprite);
 		}
 		// console.log(world);
+
 		return world;
+	}
+
+	resetLoader() {
+		this.loader.reset();
+
+		// PIXI.utils.clearTextureCache();
 	}
 }
 
